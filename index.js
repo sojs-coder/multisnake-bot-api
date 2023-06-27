@@ -17,7 +17,7 @@ class BotManager {
     if (!opts.name) throw new Error("Bot must have name.");
     this.botOpts = opts.botOpts || {};
     if (!this.botOpts.hasOwnProperty("serverUrl"))
-      this.botOpts.serverUrl = "https://multisnake-v2.sojs.repl.co";
+      this.botOpts.serverUrl = "https://multisnake.xyz";
     this.name = opts.name;
     this._updateBotRooms();
     setInterval(this._updateBotRooms.bind(this), 1000 * 5);
@@ -58,7 +58,7 @@ class BotManager {
           if(!bot.board.snakes.find(snake=>snake.uid===bot.uid)) return;
           let direction = this.onNeedDirection(bot.board, bot.roomName);
           if (!direction) return;
-          bot._socket.emit("change_direction", {uid: bot.uid, direction});
+          bot._socket.emit("change_direction", {uid: bot.uid, direction, api_key: bot._api_key});
         };
         bot._socket.on("snake_death", (data) => {
           if (data.uid === bot.uid) {
@@ -73,6 +73,7 @@ class BotManager {
             username: this.name,
             spawn: data.optimal_spawn,
             room: bot.roomName,
+            uid: bot.uid,
             bot: true
           });
         });
@@ -140,13 +141,14 @@ class Bot {
     this._socket = io(opts.serverUrl);
     this.board = null;
     this._firstConnected = true;
+    this._api_key = opts.api_key;
+    this.uid = opts.uid;
     this._socket.on("connect", () => {
       if (!this._firstConnected) return;
       this._firstConnected = false;
-      this._socket.emit("join_request", { room: this.roomName });
+      this._socket.emit("join_request", { room: this.roomName, api_key: this._api_key, uidPlease: this.uid });
     });
     this._socket.on("join_request_respond", (data) => {
-      this.uid = data.uid;
       this._room = data.room;
     });
     this._socket.on("board_request_respond", (board) => {

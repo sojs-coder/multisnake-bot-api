@@ -1,0 +1,24 @@
+{
+  "name": "multisnake-bot-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start":"node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sojs-coder/multisnake-bot-api.git"
+  },
+  "author": "SoJS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sojs-coder/multisnake-bot-api/issues"
+  },
+  "homepage": "https://github.com/sojs-coder/multisnake-bot-api#readme",
+  "dependencies": {
+    "https": "^1.0.0",
+    "socket.io-client": "^4.7.0"
+  }
+}
