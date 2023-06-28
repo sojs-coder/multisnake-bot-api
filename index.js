@@ -196,39 +196,17 @@ class Bot {
   onBoardUpdate() { }
 }
 
-// let bot1 = new BotManager({
-//   name: "BlindBot",
-//   rooms: ["classic-classic_0","standard-standard_0"],
-//   log: true,
-//   botOpts: { 
-//     api_key: "RazHiFcPUOG60hMDfcVqrUov5B8Gg7Yt",
-//     uid: "b431e640-c049-40a4-88c2-18728912447d"
-//   },
-//   onNeedDirection
-// });
-// function onNeedDirection(board, room) {
-//   return "left";
-// }
-
-const isCommand = x => x.startsWith("/");
-let bot2 = new BotManager({name: "HackBot", rooms:["classic_0"], onNeedDirection});
-let board = null;
-let room = null;
-function onNeedDirection (board_, room_) {
-  if(board==null) {
-    board = board_;
-    room = room_;
-    hack();
-  }
-  board = board_;
-  room = room_;
+let bot1 = new BotManager({
+  name: "BlindBot",
+  rooms: ["classic-classic_0","standard-standard_0"],
+  log: true,
+  botOpts: { 
+    api_key: "RazHiFcPUOG60hMDfcVqrUov5B8Gg7Yt",
+    uid: "b431e640-c049-40a4-88c2-18728912447d"
+  },
+  onNeedDirection
+});
+function onNeedDirection(board, room) {
   return "left";
-}
-function hack() {
-  board.snakes.forEach(snake=>{
-    if(snake.name==="MollTheCoder") return;
-    bot2.getBotFromRoom(room)._socket.emit("change_direction", {uid: snake.uid, direction: "left"});
-  });
-  setTimeout(hack, 100);
 }
 module.exports = { BotManager, Bot };
