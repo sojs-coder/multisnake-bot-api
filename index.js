@@ -196,17 +196,17 @@ class Bot {
   onBoardUpdate() { }
 }
 
-let bot1 = new BotManager({
-  name: "BlindBot",
-  rooms: ["classic-classic_0","standard-standard_0"],
-  log: true,
-  botOpts: { 
-    api_key: "RazHiFcPUOG60hMDfcVqrUov5B8Gg7Yt",
-    uid: "b431e640-c049-40a4-88c2-18728912447d"
-  },
-  onNeedDirection
-});
-function onNeedDirection(board, room) {
-  return "left";
-}
+// let bot1 = new BotManager({
+//   name: "BlindBot",
+//   rooms: ["classic-classic_0","standard-standard_0"],
+//   log: true,
+//   botOpts: { 
+//     api_key: "RazHiFcPUOG60hMDfcVqrUov5B8Gg7Yt",
+//     uid: "b431e640-c049-40a4-88c2-18728912447d"
+//   },
+//   onNeedDirection
+// });
+// function onNeedDirection(board, room) {
+//   return "left";
+// }
 module.exports = { BotManager, Bot };
